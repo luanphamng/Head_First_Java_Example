@@ -26,26 +26,31 @@ public class TestBattleShipDrive {
 	public static void main(String [] args)
 	{
 		BattleShip dot = new BattleShip();
+		GameHelper helper = new GameHelper();
 		
 		int numOfGuesses = 0;
 		int location = (int) (Math.random() * 5);
 		int[] locations = {location, location + 1, location + 2};
+		
 		String result;
-		String userGuess = "1";
+		String userGuess = "";
 				
 		dot.setLocationCells(locations);
 		
 		boolean isAlive = true;
 		
 		
-		while(dot.numOfHits != 3)
-		{
-			System.out.print("Please input: ");
-			
-			result = dot.checkYourSelf(userGuess);
+		while(isAlive == true)
+		{			
+			userGuess = helper.getUserInput("Please input: ");
+			result = dot.checkYourSelf(userGuess);			
 			numOfGuesses++;
+			if(result.equals("kill")) {									
+				isAlive = false;
+				break;
+			}				
 		}
-		System.out.println("Congrats! Num Of hit: " + numOfGuesses);
+		System.out.println("Congrats! Num Of guess: " + numOfGuesses);
 
 	}
 	
